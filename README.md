@@ -6,12 +6,11 @@ $ terraform plan -v 'user_name=[username]' -v 'password=[password]' ....
 ```
 or
 ```
-$ export TF_VAR_user_name="[username]"
-$ export TF_VAR_password="[password]"
-$ export TF_VAR_tenant_name="[tenant_id]"
-$ export TF_VAR_public_key="[your-rsa-public-key]"
-$ export TF_VAR_image_id="[image_id]"
-$ terraform plan
+$ export TF_VAR_USER_NAME="[username]"
+$ export TF_VAR_PASSWORD="[password]"
+$ export TF_VAR_TENANT_NAME="[tenant_id]"
+$ export TF_VAR_PUBLIC_KEY="[your-rsa-public-key]"
+$ terraform plan -var="image_id=[image_id]"
 ```
 
 

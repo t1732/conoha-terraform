@@ -6,22 +6,22 @@ variable "flavor_name" {
   default = "g-c3m2d100"
 }
 
-variable "user_name" {
+variable "USER_NAME" {
   default   = ""
   sensitive = true
 }
 
-variable "password" {
+variable "PASSWORD" {
   default   = ""
   sensitive = true
 }
 
-variable "tenant_name" {
+variable "TENANT_NAME" {
   default   = ""
   sensitive = true
 }
 
-variable "public_key" {
+variable "PUBLIC_KEY" {
   default   = ""
   sensitive = true
 }
