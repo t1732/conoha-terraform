@@ -6,7 +6,6 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    environment: conoha
 
     defaults:
       run:
@@ -30,7 +29,12 @@ jobs:
 
     - name: Terraform Apply
       if: github.event.action == 'apply'
-      run: terraform apply -auto-approve
+      env:
+        TF_VAR_USER_NAME: ${{ secrets.USER_NAME }}
+        TF_VAR_PASSWORD: ${{ secrets.PASSWORD }}
+        TF_VAR_TENANT_NAME: ${{ secrets.TENANT_NAME }}
+        TF_VAR_PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
+      run: terraform apply -var="image_id=${{ github.event.client_payload.image_id }}" -auto-approve
 
     - name: Terraform Destroy
       if: github.event.action == 'destroy'
