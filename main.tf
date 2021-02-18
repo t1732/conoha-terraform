@@ -9,10 +9,10 @@ terraform {
 }
 
 provider "openstack" {
-  user_name   = var.user_name
-  password    = var.password
+  user_name = var.user_name
+  password  = var.password
   tenant_id = var.tenant_id
-  auth_url    = var.auth_url
+  auth_url  = var.auth_url
 }
 
 resource "openstack_compute_keypair_v2" "keypair" {
