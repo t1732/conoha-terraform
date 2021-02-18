@@ -6,27 +6,32 @@ variable "flavor_name" {
   default = "g-c3m2d100"
 }
 
-variable "USER_NAME" {
+variable "user_name" {
+  description = "ConoHa loing username"
   default   = ""
   sensitive = true
 }
 
-variable "PASSWORD" {
+variable "password" {
+  description = "ConoHa loing password"
   default   = ""
   sensitive = true
 }
 
-variable "TENANT_NAME" {
+variable "tenant_id" {
+  description = "ConoHa API tenant ID"
   default   = ""
   sensitive = true
 }
 
-variable "PUBLIC_KEY" {
+variable "public_key" {
+  description = "RSA public_key"
   default   = ""
   sensitive = true
 }
 
 variable "image_id" {
+  description = "Container image ID"
   default   = ""
   sensitive = true
 }
