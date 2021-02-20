@@ -6,6 +6,10 @@ terraform {
       version = "~> 1.37.0"
     }
   }
+
+  backend "gcs" {
+    bucket = "conoha-terraform-bucket"
+  }
 }
 
 provider "openstack" {
@@ -18,4 +22,23 @@ provider "openstack" {
 resource "openstack_compute_keypair_v2" "keypair" {
   name       = "terraform-conoha-vps"
   public_key = var.public_key
+}
+
+resource "google_storage_bucket" "terraform-state-store" {
+  name          = "conoha-terraform-bucket"
+  location      = "asia-northeast1"
+  storage_class = "REGIONAL"
+
+  versioning {
+    enabled = true
+  }
+
+  lifecycle_rule {
+    action {
+      type = "Delete"
+    }
+    condition {
+      num_newer_versions = 5
+    }
+  }
 }
