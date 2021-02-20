@@ -17,6 +17,8 @@ jobs:
       TF_VAR_tenant_id: ${{ secrets.TENANT_ID }}
       TF_VAR_public_key: ${{ secrets.PUBLIC_KEY }}
       TF_VAR_image_id: ${{ github.event.client_payload.image_id }}
+
+    gcs_env: &gcs_env
       GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.gcs_credential.outputs.filePath }}
 
     steps:
@@ -36,19 +38,29 @@ jobs:
         encodedString: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
 
     - name: Terraform Init
+      env:
+        <<: *gcs_env
       run: terraform init
 
     - name: Terraform Format
+      env:
+        <<: *gcs_env
       run: terraform fmt -check
 
     - name: Terraform Plan
       if: github.event.action == 'apply'
+      env:
+        <<: *gcs_env
       run: terraform plan
 
     - name: Terraform Apply
       if: github.event.action == 'apply'
+      env:
+        <<: *gcs_env
       run: terraform apply -auto-approve
 
     - name: Terraform Destroy
       if: github.event.action == 'destroy'
+      env:
+        <<: *gcs_env
       run: terraform destroy -auto-approve
