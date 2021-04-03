@@ -26,6 +26,7 @@ resource "openstack_compute_keypair_v2" "keypair" {
 
 resource "google_storage_bucket" "terraform-state-store" {
   name          = "conoha-terraform-bucket"
+  project       = var.gcp_project_id
   location      = "asia-northeast1"
   storage_class = "REGIONAL"
 

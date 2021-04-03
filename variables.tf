@@ -35,3 +35,9 @@ variable "image_id" {
   default     = ""
   sensitive   = true
 }
+
+variable "gcp_project_id" {
+  description = "GCP Project ID"
+  default     = ""
+  sensitive   = true
+}
