@@ -28,7 +28,13 @@ jobs:
       with:
         terraform_version: 0.14.7
 
-    - name: init gcs credential
+    - name: Add masking
+      run: |
+        echo "::add-mask::$TF_VAR_tenant_id"
+        echo "::add-mask::$TF_VAR_image_id"
+        echo "::add-mask::$TF_VAR_gcp_project_id"
+
+    - name: Create gcs credential file
       id: gcs_credential
       uses: timheuer/base64-to-file@v1
       with:
