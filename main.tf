@@ -29,6 +29,9 @@ resource "google_storage_bucket" "terraform-state-store" {
   project       = var.gcp_project_id
   location      = "asia-northeast1"
   storage_class = "REGIONAL"
+  force_destroy = true
+
+  uniform_bucket_level_access = true
 
   versioning {
     enabled = true
