@@ -37,6 +37,10 @@ resource "google_storage_bucket" "terraform-state-store" {
     enabled = true
   }
 
+  lifecycle {
+    prevent_destroy = false
+  }
+
   lifecycle_rule {
     action {
       type = "Delete"
