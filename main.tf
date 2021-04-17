@@ -9,6 +9,7 @@ terraform {
 
   backend "gcs" {
     bucket = "conoha-terraform-bucket"
+    prefix = "terraform/state"
   }
 }
 
@@ -22,31 +23,4 @@ provider "openstack" {
 resource "openstack_compute_keypair_v2" "keypair" {
   name       = "terraform-conoha-vps"
   public_key = var.public_key
-}
-
-resource "google_storage_bucket" "terraform-state-store" {
-  name          = "conoha-terraform-bucket"
-  project       = var.gcp_project_id
-  location      = "asia-northeast1"
-  storage_class = "REGIONAL"
-  force_destroy = true
-
-  uniform_bucket_level_access = true
-
-  versioning {
-    enabled = true
-  }
-
-  lifecycle {
-    prevent_destroy = false
-  }
-
-  lifecycle_rule {
-    action {
-      type = "Delete"
-    }
-    condition {
-      num_newer_versions = 5
-    }
-  }
 }
